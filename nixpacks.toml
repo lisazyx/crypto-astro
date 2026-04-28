@@ -7,8 +7,8 @@ cmds = ["npm install -g pnpm && pnpm install"]
 [phases.build]
 cmds = [
   "pnpm exec vite build --outDir dist/public",
-  "pnpm exec esbuild server/_core/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:ws --external:cors --external:@trpc/server --external:zod"
+  "pnpm exec esbuild server/_core/index.ts --bundle --platform=node --packages=external --format=esm --outfile=dist/index.mjs"
 ]
 
 [start]
-cmd = "NODE_ENV=production PORT=${PORT:-3000} node dist/index.js"
+cmd = "NODE_ENV=production PORT=${PORT:-3000} node dist/index.mjs"
