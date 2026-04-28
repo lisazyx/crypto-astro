@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm install -g pnpm && pnpm install"]
+
+[phases.build]
+cmds = [
+  "pnpm exec vite build --outDir dist/public",
+  "pnpm exec esbuild server/_core/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:ws --external:cors --external:@trpc/server --external:zod"
+]
+
+[start]
+cmd = "NODE_ENV=production PORT=${PORT:-3000} node dist/index.js"
