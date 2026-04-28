@@ -9,7 +9,7 @@ RUN npm install -g pnpm@latest
 COPY package.json pnpm-lock.yaml ./
 
 # 安装依赖（包含 devDependencies 用于构建）
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 # 复制源码
 COPY . .
