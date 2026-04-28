@@ -2,11 +2,12 @@ FROM node:20-slim
 
 WORKDIR /app
 
-# 安装 pnpm
-RUN npm install -g pnpm@latest
+# 安装与本地开发环境一致的 pnpm 版本（10.4.1），确保 patch 兼容性
+RUN npm install -g pnpm@10.4.1
 
-# 复制依赖文件
+# 复制依赖文件和 patch 文件
 COPY package.json pnpm-lock.yaml ./
+COPY patches/ ./patches/
 
 # 安装依赖（包含 devDependencies 用于构建）
 RUN pnpm install --no-frozen-lockfile
